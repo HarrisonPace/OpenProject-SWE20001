@@ -39,6 +39,15 @@
 	body {
 		-webkit-text-size-adjust: none;
 	}
+    form {
+        width: 20em;
+    }
+    fieldset {
+        border:1px solid #999;
+        border-radius:8px;
+        box-shadow:0 0 10px #999;
+        padding: 1em;
+    }
 
 /* Box Model */
 
