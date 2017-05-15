@@ -35,10 +35,10 @@
 				<section class="wrapper style2">
 					<div class="container">
 						<header class="major">
-							<h2>Meetings</h2>
-							<p>Scheduled Meetings:</p>
+							<h2>Conflict Resolver</h2>
+							<p>Meeting Conflicts</p>
 						</header>
-					    <div>
+						<div>
       					<?php
       						if (!isset($_SESSION)) session_start();
       						if (isset($_SESSION['username'])) {
@@ -71,26 +71,20 @@
 
 									function diplay_table($result){
 										// Display the retrieved records
-												echo "<table border=\"1\">";
-												echo "<tr>" 
-												."<th scope=\"col\">Meeting Name</th>" 
-												."<th scope=\"col\">Description</th>" 
-												."<th scope=\"col\">Team</th>"
-												."<th scope=\"col\">Scheduled Time</th>" 
-												."</tr>";
 												// retrieve current record pointed by the result pointer 
-												while ($row = mysqli_fetch_assoc($result)){ 
-													echo "<tr>"; 
-													echo "<td>",$row["title"],"</td>";
-													echo "<td>",$row["description"],"</td>";
-													echo "<td>",$row["team"],"</td>";
-													echo "<td>",$row["meet1"],"</td>";
-													echo "</tr>"; 
+												while ($row = mysqli_fetch_assoc($result)){
+													if($row["meet1pref"] > 2 || $row["meet2pref"] > 2 || $row["meet3pref"] > 2) {
+														echo "<h2><strong>Conflict Resolved for ",$row["title"],":</h2></strong>";
+													}
+													if($row["meet1pref"] < 2 && $row["meet2pref"] < 2 && $row["meet3pref"] < 2) {
+														echo "<h2>Conflict Unresolved for ",$row["title"],":</h2>";
+														echo "<p>Please wait for more members to respond.</p>";
+													}
+													
 												}
-												echo "</table>"; 
 												
 												// Frees up the memory, after using the result pointer 
-												mysqli_free_result($result); 
+												mysqli_free_result($result);
 									}
 									
 									if (!$conn) { 
@@ -149,4 +143,3 @@
 
 	</body>
 </html>
-

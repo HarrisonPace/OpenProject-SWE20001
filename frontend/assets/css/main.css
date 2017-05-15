@@ -39,16 +39,24 @@
 	body {
 		-webkit-text-size-adjust: none;
 	}
-    form {
-        width: 20em;
+    
+	#loginset {
+        width: 100%;
     }
-    fieldset {
+    
+	#logindetails {
         border:1px solid #999;
         border-radius:8px;
         box-shadow:0 0 10px #999;
         padding: 1em;
     }
-
+	
+	#registerdetails {
+        border:1px solid #999;
+        border-radius:8px;
+        box-shadow:0 0 10px #999;
+        padding: 1em;
+    }
 /* Box Model */
 
 	*, *:before, *:after {
@@ -2177,9 +2185,19 @@
 
 /* Tables */
 
-	table {
-		width: 100%;
-	}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+	font-weight: 600;
+}
 
 		table.default {
 			width: 100%;
@@ -3149,5 +3167,4 @@
 				padding: 2em 20px;
 				text-align: left;
 			}
-
 	}

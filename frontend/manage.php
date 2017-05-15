@@ -35,32 +35,96 @@
 				<section class="wrapper style2">
 					<div class="container">
 						<header class="major">
-							<h2>manage</h2>
-							<p>manage</p>
-              <div>
+							<h2>Manage Meetings</h2>
+							<p>Your Scheduled Meetings:</p>
+						</header>
+					    <div>
       					<?php
       						if (!isset($_SESSION)) session_start();
       						if (isset($_SESSION['username'])) {
-      							echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
+      							//echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
       						} else {
-      							echo "<p>You are not logged in</p>";
+      							echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see scheduled meetings.</strong></p>";
       						}
-      					?>
+							if (isset($_SESSION['username'])) {
+								
+									$host = "127.0.0.1";
+									$user = "root";
+									$pwd = "redtango";
+									$sql_db = "openproject";
+									
+									$conn = @mysqli_connect($host,
+										$user,
+										$pwd,
+										$sql_db
+									 ); 
+									 // Checks if connection is successful 
+
+									/*Simple Function to Santise Input
+									Applies several input santiation Methods*/	
+									function sanitise_input($data) {
+										$data = trim($data);
+										$data = stripslashes($data);
+										$data = htmlspecialchars($data);
+										return $data;
+									}
+
+									function diplay_table($result){
+										// Display the retrieved records
+												echo "<form name=\"schedule\" method=\"post\" action=\"processmanage.php\"  onsubmit=\"destroyer()\">";
+												echo "<table border=\"1\">";
+												echo "<tr>" 
+												."<th scope=\"col\">Meeting Name</th>" 
+												."<th scope=\"col\">Description</th>" 
+												."<th scope=\"col\">Team</th>"
+												."<th scope=\"col\">Scheduled Time</th>" 
+												."<th scope=\"col\"><strong>Delete</strong></th>" 
+												."</tr>";
+												// retrieve current record pointed by the result pointer 
+												while ($row = mysqli_fetch_assoc($result)){ 
+													echo "<tr>"; 
+													echo "<td>",$row["title"],"</td>";
+													echo "<td>",$row["description"],"</td>";
+													echo "<td>",$row["team"],"</td>";
+													echo "<td>",$row["meet1"],"</td>";
+													echo "<td> <input type=\"checkbox\" name=\"delete\" value=\"", $row["title"], "\"> </td>";
+													echo "</tr>"; 
+												}
+												echo "</table>"; 
+												echo "<p><strong><input type=\"submit\" name=\"Submit\" value=\"DELETE\"></p></strong>";
+												echo "</form>";
+												
+												// Frees up the memory, after using the result pointer 
+												mysqli_free_result($result); 
+									}
+									
+									if (!$conn) { 
+										// Displays an error message
+										echo "<p>Database connection failure</p>"; // connection failure message
+									}
+									
+									//Define Database
+									$sql_table="meetings"; 
+									
+									$query = "select * from meetings";
+									$result = mysqli_query($conn, $query);
+									diplay_table($result);
+									
+									
+									
+									
+									
+									
+									
+									
+							mysqli_close($conn);		
+							}
+	?>
+	
       				</div>
-						</header>
 					</div>
 				</section>
 
-
-			<!-- CTA -->
-				<section id="cta" class="wrapper style3">
-					<div class="container">
-						<header>
-							<h2>Login:</h2>
-							<a href="#" class="button">Click here</a>
-						</header>
-					</div>
-				</section>
 
 			<!-- Footer -->
 		<div id="footer">
@@ -87,6 +151,13 @@
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+	<script>
+		function destroyer() {
+		  if(confirm("Do you really want to do this?"))
+			document.forms[0].submit();
+		  else
+			return false;
+		}
+	</script>
 	</body>
 </html>

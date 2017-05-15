@@ -41,18 +41,30 @@
 
 								<article>
 									<header>
-										<h2>Settings</h2>
+										<h2><span class="image"><img src="images/gear.png" alt="Settings" height="40" width="40"/></span> &nbsp; Settings</h2>
 										<p>Change <em>Global</em> Meeting Settings and Configure Account</p>
 									</header>
 
-									<span class="image"><img src="images/gear.jpg" alt="" /></span>
 
-									<p>By Default this Page will not be accessible unless logged in</p>
 
-									<h3>Meeting Settings</h3>
-									<p>(php form goes here)</p>
+									<?php
+										if (!isset($_SESSION)) session_start();
+										if (isset($_SESSION['username'])) {
+											//echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
+										} else {
+											echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see change settings.</strong></p>";
+										}
+										if (isset($_SESSION['username'])) {
+											echo "<form name=\"schedule\" method=\"post\" action=\"processemail.php\">";
+											echo "<p><label for=\"email\">Recieve Emails? :</label> <input type=\"checkbox\" name=\"email\" value= \"1\"  ></p>";
+											echo "<p><label for=\"timezone\">Use Default Timezone Settings? :</label> <input type=\"checkbox\" name=\"timezone\"  value= \"1\" checked></p>";
 
-									<p>More Settings if needed.</p>
+											
+											echo "<p><input type=\"submit\" name=\"Submit\" value=\"Set\"></p>";
+											echo "</form>";
+										}
+									?>
+
 								</article>
 
 						</div>

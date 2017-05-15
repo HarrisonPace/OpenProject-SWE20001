@@ -17,11 +17,11 @@
 						<nav id="nav">
 							<ul>
 								<li><a href="index.php">Home</a></li>
-                                <li><a href="login.php">Login</a></li>
+                                <li><a href="login.php" class="current">Login</a></li>
 								<li>
-									<a href="#">Scheduler</a>
+									<a href="schedule.php">Scheduler</a>
 									<ul>
-										<li><a href="#"  class="current">New Meeting</a></li>
+										<li><a href="schedule.php">New Meeting</a></li>
 										<li><a href="conflicts.php">Conflicts</a></li>
 										<li><a href="manage.php">Management</a></li>
 									</ul>
@@ -32,44 +32,37 @@
 						</nav>
 				</div>
 
-				<section class="wrapper style2">
-					<div class="container">
-						<header class="major">
-							<h2>Schedule</h2>
-							<p>Schedule New Meeting</p>
-						</header>
-							<form name="schedule" method="post" action="processmeetings.php">
-							<fieldset id="schedule">
-								<p><label for="title">Meeting Title</label>
-								<input name="title" type="text" id="title" maxlength="4" size="4"></p>
+			<!-- Main -->
+			<section class="wrapper style1">
+				<div class="container">
+					<div class="row 200%">
+						<section class="6u 12u(narrower)">
+							<header>
+								<h2>Register</h2>
+								<p>Create a new Group Scheduler Account</p>
+							</header>
+							<form name="register" method="post" action="newAccess.php" id="loginset">
+							<fieldset id="registerdetails">
+								<p><label for="email">Email</label></p>
+								<p><input name="email" type="email" id="email"></p>
+								<p><label for="username">Username</label></p>
+								<p><input name="username" type="text" id="username"></p>
 
-								<p><label for="description">Description</label>
-								<textarea name="description">Enter Short Description...</textarea></p>
-								
-								<p><label for="teams">Team</label>
-								<select name="team">
-								  <option value="sample">Sample</option>
-								  <option value="maths">Maths</option>
-								  <option value="programming">Programming</option>
-								</select></p>
-								
-								<p><label for="meet1">Meeting Schedule</label>
-								Select 3 Possible Meeting Times: (Actual Times will be determined according to availability)</p>
-								<p><input type="date" name="meet1">
-								<input type="time" name="meet1time"></p>
-								<p><input type="date" name="meet2">
-								<input type="time" name="meet2time"></p>
-								<p><input type="date" name="meet3">
-								<input type="time" name="meet3time"></p>
-								
-								<p><input type="submit" name="Submit" value="Set"></p>
+								<p><label for="password">Password</label></p>
+								<p><input name="password" type="password" id="password"></p>
+								<p><label for="repassword">Re-Enter Password</label></p>
+								<p><input name="repassword" type="password" id="repassword"></p>
+
+								<p><input type="submit" name="Submit" value="Register"></p>
 							</fieldset>
 							</form>
+						</section>
 					</div>
-				</section>
+				</div>
+			</section>
 
 			<!-- Footer -->
-		<div id="footer">
+				<div id="footer">
 
 				<!-- Icons -->
 					<ul class="icons">

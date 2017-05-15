@@ -28,16 +28,23 @@
 								</li>
 								<li><a href="meetings.php">Scheduled Meetings</a></li>
 								<li><a href="settings.php">Settings</a></li>
+								<?php
+									if (!isset($_SESSION)) session_start();
+									if (isset($_SESSION['username'])) {
+										echo "<li><a href='logout.php'>Logout</a></li>";
+									} else {
+										//nothing
+									}
+								?>
 							</ul>
 						</nav>
 				</div>
 				<div>
 					<?php
-						if (!isset($_SESSION)) session_start();
 						if (isset($_SESSION['username'])) {
-							echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
+							echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
 						} else {
-							echo "<p>You are not logged in</p>";
+							// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
 						}
 					?>
 				</div>
@@ -88,8 +95,8 @@
 				<section id="cta" class="wrapper style3">
 					<div class="container">
 						<header>
-							<h2>Login:</h2>
-							<a href="#" class="button">Click here</a>
+							<h2>Login Page:</h2>
+							<a href="login.php" class="button">Click here</a>
 						</header>
 					</div>
 				</section>
@@ -99,8 +106,8 @@
 
 				<!-- Icons -->
 					<ul class="icons">
-						<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li> <!-- Link Back to Github -->
-						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li> <!-- Leave for Google Cal API Integration -->
+						<li><a href="https://github.com/thehaxxa/OpenProject-SWE20001" class="icon fa-github"><span class="label">GitHub</span></a></li> <!-- Link Back to Github -->
+						<li><a href="calendar.google.com" class="icon fa-google-plus"><span class="label">Google+</span></a></li> <!-- Leave for Google Cal API Integration -->
 					</ul>
 
 				<!-- Copyright -->

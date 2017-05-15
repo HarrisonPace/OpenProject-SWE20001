@@ -41,7 +41,7 @@
 								<h2>Login</h2>
 								<p>Login to your Group Scheduler Account</p>
 							</header>
-							<form name="login" method="post" action="access.php">
+							<form name="login" method="post" action="access.php" id="loginset">
 							<fieldset id="logindetails">
 								<p><label for="username">Username</label></p>
 								<p><input name="username" type="text" id="username"></p>
@@ -50,27 +50,8 @@
 								<p><input name="password" type="password" id="password"></p>
 								<p><input type="submit" name="Submit" value="Login"></p>
 								<strong><a href="assets/badluck.gif">Forgot Password</a></strong>
-							</fieldset>
-							</form>
-						</section>
-						<section class="6u 12u(narrower)">
-							<header>
-								<h2>Register</h2>
-								<p>Create a new Group Scheduler Account</p>
-							</header>
-							<form name="register" method="post" action="newAccess.php">
-							<fieldset id="registerdetails">
-								<p><label for="email">Email</label></p>
-								<p><input name="email" type="email" id="email"></p>
-								<p><label for="username">Username</label></p>
-								<p><input name="username" type="text" id="username"></p>
-
-								<p><label for="password">Password</label></p>
-								<p><input name="password" type="password" id="password"></p>
-								<p><label for="repassword">Re-Enter Password</label></p>
-								<p><input name="repassword" type="password" id="repassword"></p>
-
-								<p><input type="submit" name="Submit" value="Register"></p>
+								&emsp; &emsp;
+								<strong><a href="register.php">Register</a></strong>
 							</fieldset>
 							</form>
 						</section>
