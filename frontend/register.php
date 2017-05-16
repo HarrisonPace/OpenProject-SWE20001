@@ -9,6 +9,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/modal.css" />
+			<!-- css file for javascript -->
+	
 	</head>
 	<body>
 		<div id="page-wrapper">
@@ -46,17 +49,17 @@
 								<h2>Register</h2>
 								<p>Create a new Group Scheduler Account</p>
 							</header>
-							<form name="register" method="post" action="newAccess.php" id="loginset">
+							<form name="register" method="post" action="newAccess.php" id="loginset">  <!-- Form is submitted here -->
 							<fieldset id="registerdetails">
 								<p><label for="email">Email</label></p>
-								<p><input name="email" type="email" id="email"></p>
+								<p><input name="email" type="email" id="sid"></p>
 								<p><label for="username">Username</label></p>
-								<p><input name="username" type="text" id="username"></p>
+								<p><input name="username" type="text" id="uname"></p>
 
 								<p><label for="password">Password</label></p>
-								<p><input name="password" type="password" id="password"></p>
+								<p><input name="password" type="password" id="pwd1"></p>
 								<p><label for="repassword">Re-Enter Password</label></p>
-								<p><input name="repassword" type="password" id="repassword"></p>
+								<p><input name="repassword" type="password" id="pwd2"></p>
 
 								<p><input type="submit" name="Submit" value="Register"></p>
 							</fieldset>
@@ -86,5 +89,6 @@
 		<script src="assets/js/skel.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
+		<script src="assets/js/register.js"></script>
 	</body>
 </html>
