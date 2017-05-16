@@ -17,7 +17,6 @@
 				<nav id="nav">
 					<ul>
 						<li><a href="index.php" class="current">Home</a></li>
-						<li><a href="login.php">Login</a></li>
 						<li>
 							<a href="schedule.php">Scheduler</a>
 							<ul>
@@ -33,7 +32,7 @@
 							if (isset($_SESSION['username'])) {
 								echo "<li><a href='logout.php'>Logout</a></li>";
 							} else {
-								//nothing
+								echo "<li><a href='login.php'>Login</a></li>";
 							}
 						?>
 					</ul>
