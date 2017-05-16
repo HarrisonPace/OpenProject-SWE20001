@@ -28,11 +28,10 @@
 						<li><a href="meetings.php">Scheduled Meetings</a></li>
 						<li><a href="settings.php" class="current">Settings</a></li>
 						<?php
-							if (!isset($_SESSION)) session_start();
 							if (isset($_SESSION['username'])) {
-								echo "<li><a href='logout.php'>Logout</a></li>";
-							} else {
 								echo "<li><a href='login.php'>Login</a></li>";
+							} else {
+								echo "<li><a href='logout.php'>Logout</a></li>";
 							}
 						?>
 					</ul>

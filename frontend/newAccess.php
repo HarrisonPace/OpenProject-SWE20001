@@ -1,4 +1,3 @@
-<?php //include ('header.inc'); ?>
 <?php
 	// connection info
 	require_once("dbSettings.php");
@@ -58,8 +57,8 @@
 
 	echo "<p>Done</p>";
 ?>
-</article>
-<?php //include ('footer.inc');
+
+<?php
 header("Location: login.php");
 die();
 ?>
