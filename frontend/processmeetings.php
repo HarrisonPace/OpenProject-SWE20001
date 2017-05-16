@@ -1,14 +1,8 @@
 <?php
-	$host = "127.0.0.1";
-    $user = "root";
-    $pwd = "redtango";
-    $sql_db = "openproject";
+	// connection info
+	require_once("dbSettings.php");
 
-    $conn = @mysqli_connect($host,
-        $user,
-        $pwd,
-        $sql_db
-     );
+	$conn = @mysqli_connect("$host:$port", $user, $pwd, $sql_db);
 
 	function sanitise_input($data)
 	{
@@ -42,10 +36,10 @@
 		$title = sanitise_input($title);
 		$description = sanitise_input($description);
 		$team = sanitise_input($team);
-		
-		$meet1full = $meet1 . " " . $meet1sel . ":00"; 
-		$meet2full = $meet2 . " " . $meet2sel . ":00"; 
-		$meet3full = $meet3 . " " . $meet3sel . ":00"; 
+
+		$meet1full = $meet1 . " " . $meet1sel . ":00";
+		$meet2full = $meet2 . " " . $meet2sel . ":00";
+		$meet3full = $meet3 . " " . $meet3sel . ":00";
 
 
 
@@ -55,7 +49,7 @@
 			//Query to add new user
 			$query = "INSERT INTO meetings (title, description, team, meet1, meet2, meet3) VALUES ('$title', '$description', '$team', '$meet1full', '$meet2full', '$meet3full');";
 
-			
+
 			$result = mysqli_query($conn, $query);
 			if(!$result)
 			{

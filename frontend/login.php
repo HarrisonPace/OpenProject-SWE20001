@@ -12,26 +12,25 @@
 	</head>
 	<body>
 		<div id="page-wrapper">
-				<div id="header">
-						<h1><a href="index.php" id="logo">Group Assignment <em>Scheduler</em></a></h1>
-						<nav id="nav">
+			<div id="header">
+				<h1><a href="index.php" id="logo">Group Assignment <em>Scheduler</em></a></h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="index.php">Home</a></li>
+						<li><a href="login.php" class="current">Login</a></li>
+						<li>
+							<a href="schedule.php">Scheduler</a>
 							<ul>
-								<li><a href="index.php">Home</a></li>
-                                <li><a href="login.php" class="current">Login</a></li>
-								<li>
-									<a href="schedule.php">Scheduler</a>
-									<ul>
-										<li><a href="schedule.php">New Meeting</a></li>
-										<li><a href="conflicts.php">Conflicts</a></li>
-										<li><a href="manage.php">Management</a></li>
-									</ul>
-								</li>
-								<li><a href="meetings.php">Scheduled Meetings</a></li>
-								<li><a href="settings.php">Settings</a></li>
+								<li><a href="schedule.php">New Meeting</a></li>
+								<li><a href="conflicts.php">Conflicts</a></li>
+								<li><a href="manage.php">Management</a></li>
 							</ul>
-						</nav>
-				</div>
-
+						</li>
+						<li><a href="meetings.php">Scheduled Meetings</a></li>
+						<li><a href="settings.php">Settings</a></li>
+					</ul>
+				</nav>
+			</div>
 			<!-- Main -->
 			<section class="wrapper style1">
 				<div class="container">
@@ -58,32 +57,27 @@
 					</div>
 				</div>
 			</section>
-
 			<!-- Footer -->
-				<div id="footer">
-
+			<div id="footer">
 				<!-- Icons -->
-					<ul class="icons">
-						<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li> <!-- Link Back to Github -->
-						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li> <!-- Leave for Google Cal API Integration -->
-					</ul>
-
+				<ul class="icons">
+					<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li> <!-- Link Back to Github -->
+					<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li> <!-- Leave for Google Cal API Integration -->
+				</ul>
 				<!-- Copyright -->
-					<div class="copyright">
-						<ul class="menu">
-							<li>&copy; Swinburne University. All rights reserved</li><li>Design: <a href="#">Lachlan Haggart, Harrison Pace & Hoang Nguyen</a></li>
-						</ul>
-					</div>
+				<div class="copyright">
+					<ul class="menu">
+						<li>&copy; Swinburne University. All rights reserved</li><li>Design: <a href="#">Lachlan Haggart, Harrison Pace & Hoang Nguyen</a></li>
+					</ul>
+				</div>
 			</div>
 
 		</div>
-
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.dropotron.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
 	</body>
 </html>

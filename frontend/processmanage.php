@@ -1,14 +1,8 @@
 <?php
-	$host = "127.0.0.1";
-    $user = "root";
-    $pwd = "redtango";
-    $sql_db = "openproject";
+	// connection info
+	require_once("dbSettings.php");
 
-    $conn = @mysqli_connect($host,
-        $user,
-        $pwd,
-        $sql_db
-     );
+	$conn = @mysqli_connect("$host:$port", $user, $pwd, $sql_db);
 
 	function sanitise_input($data)
 	{
@@ -33,11 +27,11 @@
 		if($delete == "") {
 			//do nothing
 		} else {
-			
-		
 
-		
-      	//echo $_SESSION['username'];
+
+
+
+		  //echo $_SESSION['username'];
 
 			//Define Database
 			$sql_table="users";
@@ -45,13 +39,13 @@
 			//Query to add new user
 			$query = "DELETE FROM meetings WHERE title = '$delete';";
 
-			
+
 			$result = mysqli_query($conn, $query);
 			if(!$result)
 			{
 				echo "<p>Something is wrong with ", $query, "</p>";
 			}
-			
+
 		}
 	} //end else no connection
 
