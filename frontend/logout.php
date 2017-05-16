@@ -1,6 +1,6 @@
 <?php
-	/*Simple Scipt to Remove session thereby logging User out*/
 	session_start();
-	session_destroy(); //when called will end session preventing access to supervisor interface
-	header("location:login.php"); //return user to login page
+	session_unset(); // remove all session variables
+	session_destroy(); // destroy the session thereby logging out the user
+	header("Location: login.php"); //return user to login page
 ?>
