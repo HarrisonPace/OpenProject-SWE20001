@@ -20,6 +20,7 @@
 				<nav id="nav">
 					<ul>
 						<li><a href="index.php">Home</a></li>
+						<li><a href="teams.php">Teams</a></li>
 						<li>
 							<a href="schedule.php">Scheduler</a>
 							<ul>

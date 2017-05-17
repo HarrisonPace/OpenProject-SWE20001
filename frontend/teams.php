@@ -44,13 +44,13 @@
 			<!-- Main -->
 				<section class="wrapper style1">
 					<div class="container">
+						<header class="major">
+							<h2>Teams</h2>
+							<p>Create and Manage your Teams</p>
+						</header>
 						<div id="content">
 							<!-- Content -->
 							<article>
-								<header>
-									<h2><span class="image"><img src="images/gear.png" alt="Settings" height="40" width="40"/></span> &nbsp; Settings</h2>
-									<p>Change <em>Global</em> Meeting Settings and Configure Account</p>
-								</header>
 								<?php
 									if (!isset($_SESSION)) session_start();
 									if (isset($_SESSION['username'])) {
@@ -59,14 +59,20 @@
 										echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see change settings.</strong></p>";
 									}
 									if (isset($_SESSION['username'])) {
-										echo "<form name=\"schedule\" method=\"post\" action=\"processemail.php\">";
-										echo "<p><label for=\"email\">Recieve Emails? :</label> <input type=\"checkbox\" name=\"email\" value= \"1\"  ></p>";
-										echo "<p><label for=\"timezone\">Use Default Timezone Settings? :</label> <input type=\"checkbox\" name=\"timezone\"  value= \"1\" checked></p>";
+										$id = $_SESSION['id'];
+										echo "<h3>Your teams</h3>";
+										echo "<h3>Create New Team</h3>";
+										echo "
+											<form name='teamcreate' method='post' action='newTeam.php'>
+												<fieldset id='schedule'>
+													<p><label for='teamname'>Team Name</label>
+													<input name='teamname' type='text' id='teamname'></p>
+													<input type='hidden' name='teamleaderid' value=$id>
 
-
-										echo "<p><input type=\"submit\" name=\"Submit\" value=\"Set\"></p>";
-										echo "</form>";
-										echo "<p></p>";
+													<p><input type='submit' name='Submit' value='Create'></p>
+												</fieldset>
+											</form>
+										";
 									}
 								?>
 							</article>

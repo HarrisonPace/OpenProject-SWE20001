@@ -29,11 +29,8 @@
 
 		//Query to Check if User Exists
 		$query_login = "SELECT * FROM users WHERE username='$username' and password='$password';";
-		//Query to fetch id
-		$query_getid = "SELECT id FROM users WHERE username='$username' and password='$password';";
 
 		$result_login = mysqli_query($conn, $query_login);
-		$result_getid = mysqli_query($conn, $query_getid);
 
 		//Check if User Exists on dB and if so, Log User in with session
 		if(!$result_login) {
@@ -44,7 +41,7 @@
 						session_start();
 						$_SESSION['username'] = $username;
 						$_SESSION['password'] = $password;
-						$_SESSION['id'] = mysqli_fetch_assoc($result_getid);
+						$_SESSION['id'] = $record["id"];
 						header("Location: manage.php");
 					}
 					else {
