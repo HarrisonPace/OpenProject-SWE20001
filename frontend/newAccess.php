@@ -2,7 +2,7 @@
 	// connection info
 	require_once("dbSettings.php");
 
-	$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
+	$conn = @mysqli_connect("$host:$port", $user, $pwd, $sql_db);
 
 	function sanitise_input($data)
 	{
@@ -32,6 +32,8 @@
 		$username = sanitise_input($username);
 		$password = sanitise_input($password);
 		$repassword = sanitise_input($repassword);
+
+		$query_username_check = "SELECT username FROM Users WHERE username='$username'";
 
 		if ($password != $repassword)
 		{

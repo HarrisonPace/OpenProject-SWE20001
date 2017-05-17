@@ -2,7 +2,7 @@
 	// connection info
 	require_once("dbSettings.php");
 
-	$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
+	$conn = @mysqli_connect("$host:$port", $user, $pwd, $sql_db);
 
 	function sanitise_input($data) {
 		$data = trim($data);
@@ -28,21 +28,23 @@
 		$sql_table="users";
 
 		//Query to Check if User Exists
-		$query = "SELECT * FROM users WHERE username='$username' and password='$password';";
+		$query_login = "SELECT * FROM users WHERE username='$username' and password='$password';";
+		//Query to fetch id
+		$query_getid = "SELECT id FROM users WHERE username='$username' and password='$password';";
 
-
-		$result = mysqli_query($conn, $query);
-
+		$result_login = mysqli_query($conn, $query_login);
+		$result_getid = mysqli_query($conn, $query_getid);
 
 		//Check if User Exists on dB and if so, Log User in with session
-		if(!$result) {
-				echo "<p>Something is wrong with ", $query, "</p>";
+		if(!$result_login) {
+				echo "<p>Something is wrong with ", $query_login, "</p>";
 			} else {
-				$record = mysqli_fetch_assoc($result);
+				$record = mysqli_fetch_assoc($result_login);
 					if (($record["username"] == $username) && ($record["password"] == $password)) {
 						session_start();
 						$_SESSION['username'] = $username;
 						$_SESSION['password'] = $password;
+						$_SESSION['id'] = mysqli_fetch_assoc($result_getid);
 						header("Location: manage.php");
 					}
 					else {

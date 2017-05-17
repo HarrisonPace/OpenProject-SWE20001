@@ -1,3 +1,6 @@
+<?php
+	session_start();
+?>
 <!DOCTYPE HTML>
 <!--
 	Template Theme modified for Development Project 1: Tools and Practices Open Project Assignment - "Arcana by HTML5 UP"
@@ -32,9 +35,9 @@
 						<li><a href="settings.php">Settings</a></li>
 						<?php
 							if (isset($_SESSION['username'])) {
-								echo "<li><a href='login.php'>Login</a></li>";
-							} else {
 								echo "<li><a href='logout.php'>Logout</a></li>";
+							} else {
+								echo "<li><a href='login.php'>Login</a></li>";
 							}
 						?>
 					</ul>
