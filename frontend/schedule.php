@@ -50,16 +50,32 @@
 					<form name="schedule" method="post" action="processmeetings.php">
 						<fieldset id="schedule">
 							<p><label for="title">Meeting Title</label>
-							<input name="title" type="text" id="title" maxlength="4" size="4"></p>
+							<input name="title" type="text" id="title"></p>
 							<p><label for="description">Description</label>
-							<textarea name="description">Enter Short Description...</textarea></p>
+							<textarea name="description" placeholder="Enter Short Description..."></textarea></p>
+							<?php 
+								// connection info
+								require_once("dbSettings.php");
+								$conn = @mysqli_connect("$host:$port", $user, $pwd, $sql_db);
 
-							<p><label for="teams">Team</label>
-							<select name="team">
-								<option value="sample">Sample</option>
-								<option value="maths">Maths</option>
-								<option value="programming">Programming</option>
-							</select></p>
+								$username = $_SESSION['username'];
+							
+								$query_getteams = "SELECT * FROM teams NATURAL JOIN userteams NATURAL JOIN users WHERE username='$username';";
+								$result_getteams = mysqli_query($conn, $query_getteams);
+
+								echo "
+									<p><label for='teams'>Team</label>
+									<select name='team'>
+								";
+
+								while ($row = mysqli_fetch_assoc($result_getteams)){
+								    echo "<option value='" . $row['teamname'] . "'>" . $row['teamname'] . "</option>";
+								}
+
+								echo "
+									</select></p>
+								";
+							?>
 
 							<p><label for="meet1">Meeting Schedule</label>
 							Select 3 Possible Meeting Times: (Actual Times will be determined according to availability)</p>

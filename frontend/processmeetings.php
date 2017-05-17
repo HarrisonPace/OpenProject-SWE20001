@@ -22,7 +22,7 @@
 	else
 	{ // Upon successful connection
 
-		//Retrieve Username & Password from DB
+		// Retrieve Username & Password from DB
 		$title=$_POST['title'];
 		$description=$_POST['description'];
 		$team=$_POST['team'];
@@ -41,23 +41,28 @@
 		$meet2full = $meet2 . " " . $meet2sel . ":00";
 		$meet3full = $meet3 . " " . $meet3sel . ":00";
 
+		// Define Database
+		$sql_table="meetings";
 
+		// query to get team id from team name
+		$query_getteamid = "SELECT teamid FROM teams WHERE teamname='$team'";
+		$result_getteamid = mysqli_query($conn, $query_getteamid);
 
-			//Define Database
-			$sql_table="meetings";
+		if (!$result_getteamid) {
+			echo "<p>Something is wrong with", $query_getteamid, "</p>";
+		} else {
+			$record_getteamid = mysqli_fetch_assoc($result_getteamid);
+			$teamid = $record_getteamid["teamid"];
 
-			//Query to add new user
-			$query = "INSERT INTO meetings (title, description, team, meet1, meet2, meet3) VALUES ('$title', '$description', '$team', '$meet1full', '$meet2full', '$meet3full');";
+			// query to insert meeting into db
+			$query_insertmeeting = "INSERT INTO meetings (title, description, teamid, meet1, meet2, meet3) VALUES ('$title', '$description', '$teamid', '$meet1full', '$meet2full', '$meet3full');";
+			$result_insertmeeting = mysqli_query($conn, $query_insertmeeting);
 
-
-			$result = mysqli_query($conn, $query);
-			if(!$result)
-			{
-				echo "<p>Something is wrong with ", $query, "</p>";
+			if (!$result_insertmeeting) {
+				echo "<p>Something is wrong with ", $query_insertmeeting, "</p>";
 			}
-
-
-	} //end else no connection
+		}
+	} // end else no connection
 
 	echo "<p>Done</p>";
 ?>

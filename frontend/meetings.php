@@ -71,7 +71,7 @@
 									return $data;
 								}
 
-								function diplay_table($result){
+								function display_table($result){
 									// Display the retrieved records
 									echo "<table border=\"1\">";
 									echo "<tr>"
@@ -85,7 +85,7 @@
 										echo "<tr>";
 										echo "<td>",$row["title"],"</td>";
 										echo "<td>",$row["description"],"</td>";
-										echo "<td>",$row["team"],"</td>";
+										echo "<td>",$row["teamname"],"</td>";
 										echo "<td>",$row["meet1"],"</td>";
 										echo "</tr>";
 									}
@@ -103,9 +103,12 @@
 								//Define Database
 								$sql_table="meetings";
 
-								$query = "select * from meetings";
-								$result = mysqli_query($conn, $query);
-								diplay_table($result);
+								$id = $_SESSION['id'];
+
+								$query_getmeetings = "SELECT * FROM meetings NATURAL JOIN teams NATURAL JOIN userteams WHERE userid=$id;";
+								$result_getmeetings = mysqli_query($conn, $query_getmeetings);
+
+								display_table($result_getmeetings);
 								mysqli_close($conn);
 							}
 						?>

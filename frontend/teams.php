@@ -103,7 +103,7 @@
 
 										if(!$result_teams) {
 											echo "<p>Something is wrong with ", $query_teams, "</p>";
-										} elseif (mysqli_num_rows($result) == 0) {
+										} elseif (mysqli_num_rows($result_teams) == 0) {
 											echo "<p>Looks like you don't have any teams. Why not create one?</p>";
 										} else {
 											display_table($result_teams);
@@ -112,7 +112,7 @@
 										echo "<h3>Create New Team</h3>";
 										echo "
 											<form name='teamcreate' method='post' action='newTeam.php'>
-												<fieldset id='schedule'>
+												<fieldset id='teamdetails'>
 													<p><label for='teamname'>Team Name</label>
 													<input name='teamname' type='text' id='teamname'></p>
 													<input type='hidden' name='teamleaderid' value=$id>
