@@ -64,10 +64,6 @@
 
 										$conn = @mysqli_connect("$host:$port", $user, $pwd, $sql_db);
 
-										$id = $_SESSION['id'];
-										$query_teams = "SELECT * FROM teams NATURAL JOIN userteams NATURAL JOIN users WHERE userid='$id';";
-										$result_teams = mysqli_query($conn, $query_teams);
-
 										function display_table($result){
 											// Display the retrieved records
 											echo "<table border=\"1\">";
@@ -99,10 +95,16 @@
 											mysqli_free_result($result);
 										}
 
+										$id = $_SESSION['id'];
+										$query_teams = "SELECT * FROM teams NATURAL JOIN userteams NATURAL JOIN users WHERE userid='$id';";
+										$result_teams = mysqli_query($conn, $query_teams);
+
 										echo "<h3>Your teams</h3>";
 
 										if(!$result_teams) {
 											echo "<p>Something is wrong with ", $query_teams, "</p>";
+										} elseif (mysqli_num_rows($result) == 0) {
+											echo "<p>Looks like you don't have any teams. Why not create one?</p>";
 										} else {
 											display_table($result_teams);
 										}
