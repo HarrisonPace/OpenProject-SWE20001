@@ -34,22 +34,22 @@
 
 		//Check if User Exists on dB and if so, Log User in with session
 		if(!$result_login) {
-				echo "<p>Something is wrong with ", $query_login, "</p>";
+			echo "<p>Something is wrong with ", $query_login, "</p>";
+		} else {
+			$record = mysqli_fetch_assoc($result_login);
+			
+			if (($record["username"] == $username) && ($record["password"] == $password)) {
+				session_start();
+				$_SESSION['username'] = $username;
+				$_SESSION['password'] = $password;
+				$_SESSION['id'] = $record["userid"];
+				header("Location: manage.php");
 			} else {
-				$record = mysqli_fetch_assoc($result_login);
-					if (($record["username"] == $username) && ($record["password"] == $password)) {
-						session_start();
-						$_SESSION['username'] = $username;
-						$_SESSION['password'] = $password;
-						$_SESSION['id'] = $record["id"];
-						header("Location: manage.php");
-					}
-					else {
-						echo "<p>Wrong Username or Password!</p>";
-						echo "<p><a href=\"login.php\">Return to Login Page.</a></p>";
-						//sleep(3); -- optional automatic redirection
-						//header("location:login.php");
-					}
+				echo "<p>Wrong Username or Password!</p>";
+				echo "<p><a href=\"login.php\">Return to Login Page.</a></p>";
+				//sleep(3); -- optional automatic redirection
+				//header("location:login.php");
 			}
+		}
 	}
 ?>

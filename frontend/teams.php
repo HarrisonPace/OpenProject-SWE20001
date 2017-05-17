@@ -59,8 +59,54 @@
 										echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see change settings.</strong></p>";
 									}
 									if (isset($_SESSION['username'])) {
+										// connection info
+										require_once("dbSettings.php");
+
+										$conn = @mysqli_connect("$host:$port", $user, $pwd, $sql_db);
+
 										$id = $_SESSION['id'];
+										$query_teams = "SELECT * FROM teams NATURAL JOIN userteams NATURAL JOIN users WHERE userid='$id';";
+										$result_teams = mysqli_query($conn, $query_teams);
+
+										function display_table($result){
+											// Display the retrieved records
+											echo "<table border=\"1\">";
+											echo "<tr>"
+											."<th scope=\"col\">Team Name</th>"
+											."<th scope=\"col\">Team Leader</th>"
+											."</tr>";
+											// retrieve current record pointed by the result pointer
+											while ($row = mysqli_fetch_assoc($result)){
+												global $conn;
+
+												$teamleaderid = $row["teamleaderid"];
+												$query_leader = "SELECT username FROM users WHERE userid='$teamleaderid';";
+												$result_leader = mysqli_query($conn, $query_leader);
+												$record = mysqli_fetch_assoc($result_leader);
+
+												if(!$result_leader) {
+													echo "<p>Something is wrong with ", $query_leader, "</p>";
+												}
+
+												echo "<tr>";
+												echo "<td>",$row["teamname"],"</td>";
+												echo "<td>",$record["username"],"</td>";
+												echo "</tr>";
+											}
+											echo "</table>";
+
+											// Frees up the memory, after using the result pointer
+											mysqli_free_result($result);
+										}
+
 										echo "<h3>Your teams</h3>";
+
+										if(!$result_teams) {
+											echo "<p>Something is wrong with ", $query_teams, "</p>";
+										} else {
+											display_table($result_teams);
+										}
+
 										echo "<h3>Create New Team</h3>";
 										echo "
 											<form name='teamcreate' method='post' action='newTeam.php'>

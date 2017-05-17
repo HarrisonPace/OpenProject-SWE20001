@@ -31,13 +31,28 @@
 
 		$sql_table="users";
 
-		//Query to add new user
-		$query = "INSERT INTO teams (teamname, teamleaderid) VALUES ('$teamname', '$teamleaderid');";
+		//Query to add new team
+		$query_newteam = "INSERT INTO teams (teamname, teamleaderid) VALUES ('$teamname', '$teamleaderid');";
 
-		$result = mysqli_query($conn, $query);
-		if(!$result)
+		$result_newteam = mysqli_query($conn, $query_newteam);
+
+		if(!$result_newteam)
 		{
-			echo "<p>Something is wrong with ", $query, "</p>";
+			echo "<p>Something is wrong with ", $query_newteam, "</p>";
+		} 
+		else
+		{
+			$last_id = mysqli_insert_id($conn);
+
+			//Query to add team creator to team
+			$query_adduser = "INSERT INTO userteams (userid, teamid) VALUES ('$teamleaderid', '$last_id');";
+
+			$result_adduser = mysqli_query($conn, $query_adduser);
+
+			if(!$result_adduser)
+			{
+				echo "<p>Something is wrong with ", $query_adduser, "</p>";
+			} 
 		}
 
 	} //end else no connection
@@ -46,6 +61,6 @@
 ?>
 
 <?php
-header("Location: login.php");
-die();
+	header("Location: login.php");
+	die();
 ?>
