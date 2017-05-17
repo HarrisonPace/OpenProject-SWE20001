@@ -47,48 +47,57 @@
 						<h2>Schedule</h2>
 						<p>Schedule New Meeting</p>
 					</header>
-					<form name="schedule" method="post" action="processmeetings.php">
-						<fieldset id="schedule">
-							<p><label for="title">Meeting Title</label>
-							<input name="title" type="text" id="title"></p>
-							<p><label for="description">Description</label>
-							<textarea name="description" placeholder="Enter Short Description..."></textarea></p>
-							<?php 
-								// connection info
-								require_once("dbSettings.php");
-								$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
-
-								$username = $_SESSION['username'];
+					<?php 
+						if (!isset($_SESSION)) session_start();
+						if (isset($_SESSION['username'])) {
+							//echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
 							
-								$query_getteams = "SELECT * FROM teams NATURAL JOIN userteams NATURAL JOIN users WHERE username='$username';";
-								$result_getteams = mysqli_query($conn, $query_getteams);
+							// connection info
+							require_once("dbSettings.php");
+							$conn = @mysqli_connect("$host:$port", $user, $pwd, $sql_db);
 
-								echo "
-									<p><label for='teams'>Team</label>
-									<select name='team'>
-								";
+							$username = $_SESSION['username'];
+						
+							$query_getteams = "SELECT * FROM teams NATURAL JOIN userteams NATURAL JOIN users WHERE username='$username';";
+							$result_getteams = mysqli_query($conn, $query_getteams);
 
-								while ($row = mysqli_fetch_assoc($result_getteams)){
-								    echo "<option value='" . $row['teamname'] . "'>" . $row['teamname'] . "</option>";
-								}
+							echo "
+								<form name='schedule' method='post' action='processmeetings.php'>
+									<fieldset id='schedule'>
+										<p><label for='title'>Meeting Title</label>
+										<input name='title' type='text' id='title'></p>
+										<p><label for='description'>Description</label>
+										<textarea name='description' placeholder='Enter Short Description...'></textarea></p>
+										<p><label for='teams'>Team</label>
+										<select name='team'>
+							";
 
-								echo "
-									</select></p>
-								";
-							?>
+							while ($row = mysqli_fetch_assoc($result_getteams)){
+							    echo "<option value='" . $row['teamname'] . "'>" . $row['teamname'] . "</option>";
+							}
 
-							<p><label for="meet1">Meeting Schedule</label>
-							Select 3 Possible Meeting Times: (Actual Times will be determined according to availability)</p>
-							<p><input type="date" name="meet1">
-							<input type="time" name="meet1time"></p>
-							<p><input type="date" name="meet2">
-							<input type="time" name="meet2time"></p>
-							<p><input type="date" name="meet3">
-							<input type="time" name="meet3time"></p>
+							echo "
+								</select></p>
+							";
 
-							<p><input type="submit" name="Submit" value="Set"></p>
-						</fieldset>
-					</form>
+							echo "
+										<p><label for='meet1'>Meeting Schedule</label>
+										Select 3 Possible Meeting Times: (Actual Times will be determined according to availability)</p>
+										<p><input type='date' name='meet1'>
+										<input type='time' name='meet1time'></p>
+										<p><input type='date' name='meet2'>
+										<input type='time' name='meet2time'></p>
+										<p><input type='date' name='meet3'>
+										<input type='time' name='meet3time'></p>
+
+										<p><input type='submit' name='Submit' value='Set'></p>
+									</fieldset>
+								</form>
+							";
+						} else {
+							echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to schedule meetings.</strong></p>";
+						}
+					?>	
 				</div>
 			</section>
 			<!-- Footer -->

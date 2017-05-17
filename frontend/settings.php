@@ -55,18 +55,15 @@
 									if (!isset($_SESSION)) session_start();
 									if (isset($_SESSION['username'])) {
 										//echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
-									} else {
-										echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see change settings.</strong></p>";
-									}
-									if (isset($_SESSION['username'])) {
 										echo "<form name=\"schedule\" method=\"post\" action=\"processemail.php\">";
 										echo "<p><label for=\"email\">Recieve Emails? :</label> <input type=\"checkbox\" name=\"email\" value= \"1\"  ></p>";
 										echo "<p><label for=\"timezone\">Use Default Timezone Settings? :</label> <input type=\"checkbox\" name=\"timezone\"  value= \"1\" checked></p>";
 
-
 										echo "<p><input type=\"submit\" name=\"Submit\" value=\"Set\"></p>";
 										echo "</form>";
 										echo "<p></p>";
+									} else {
+										echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see change settings.</strong></p>";
 									}
 								?>
 							</article>

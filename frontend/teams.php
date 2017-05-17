@@ -55,14 +55,11 @@
 									if (!isset($_SESSION)) session_start();
 									if (isset($_SESSION['username'])) {
 										//echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
-									} else {
-										echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see change settings.</strong></p>";
-									}
-									if (isset($_SESSION['username'])) {
+
 										// connection info
 										require_once("dbSettings.php");
 
-										$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
+										$conn = @mysqli_connect("$host:$port", $user, $pwd, $sql_db);
 
 										function display_table($result){
 											// Display the retrieved records
@@ -121,6 +118,8 @@
 												</fieldset>
 											</form>
 										";
+									} else {
+										echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see change settings.</strong></p>";
 									}
 								?>
 							</article>
