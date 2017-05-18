@@ -48,7 +48,7 @@
 				$_SESSION['username'] = $username;
 				$_SESSION['password'] = $password;
 				$_SESSION['id'] = $record["userid"];
-				header("Location: manage.php");
+				header("Location: meetings.php");
 			} else {
 				echo "<p>Wrong Username or Password!</p>";
 				echo "<p><a href=\"login.php\">Return to Login Page.</a></p>";

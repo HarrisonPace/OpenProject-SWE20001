@@ -53,7 +53,7 @@
 							  if (isset($_SESSION['username'])) {
 								  //echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
 							  } else {
-								  echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see scheduled meetings.</strong></p>";
+								  echo "<p style='text-align:center;'>You are not logged in. <strong>Please login to see scheduled meetings.</strong></p>";
 							  }
 							if (isset($_SESSION['username'])) {
 								// connection info
@@ -73,34 +73,34 @@
 									return $data;
 								}
 
-								function diplay_table($result){
+								function display_table($result){
 									// Display the retrieved records
 									// retrieve current record pointed by the result pointer
 									while ($row = mysqli_fetch_assoc($result)){
-										echo "<form name=\"schedule\" method=\"post\" action=\"processconflicts.php\">";
-										echo "<table border=\"1\">";
+										echo "<form name='schedule' method='post' action='processconflicts.php'>";
+										echo "<table border='1'>";
 										echo "<tr>"
-										."<th scope=\"col\">Meeting Time</th>"
-										."<th scope=\"col\"><strong>Select</strong></th>"
+										."<th scope='col'>Meeting Time</th>"
+										."<th scope='col'><strong>Select</strong></th>"
 										."</tr>";
 										if($row["meet1pref"] < 2 && $row["meet2pref"] < 2 && $row["meet3pref"] < 2) {
 											echo "<p><strong>Resolve Conflict for ",$row["title"],":</p></strong>";
 											echo "<tr>";
 											echo "<td>",$row["meet1"],"</td>";
-											echo "<td> <input type=\"radio\" name=\"select\" value=\"meet1\"> </td>";
+											echo "<td> <input type='radio' name='select' value='meet1'> </td>";
 											echo "</tr>";
 											echo "<tr>";
 											echo "<td>",$row["meet2"],"</td>";
-											echo "<td> <input type=\"radio\" name=\"select\" value=\"meet2\"> </td>";
+											echo "<td> <input type='radio' name='select' value='meet2'> </td>";
 											echo "</tr>";
 											echo "<tr>";
 											echo "<td>",$row["meet3"],"</td>";
-											echo "<td> <input type=\"radio\" name=\"select\" value=\"meet3\"> </td>";
-											echo "<input type=\"hidden\" name=\"meeting\" value=\"", $row["title"] ,"\">";
+											echo "<td> <input type='radio' name='select' value='meet3'> </td>";
+											echo "<input type='hidden' name='meeting' value='", $row["title"] ,"'>";
 											echo "</tr>";
 										}
 										echo "</table>";
-										echo "<p><input type=\"submit\" name=\"Submit\" value=\"Set\"></p>";
+										echo "<p><input type='submit' name='Submit' value='Set'></p>";
 										echo "</form>";
 									}
 
@@ -116,9 +116,12 @@
 								//Define Database
 								$sql_table="meetings";
 
-								$query = "select * from meetings";
-								$result = mysqli_query($conn, $query);
-								diplay_table($result);
+								$id = $_SESSION['id'];
+
+								$query_getmeetings = "SELECT * FROM meetings NATURAL JOIN teams NATURAL JOIN userteams WHERE userid=$id;";
+								$result_getmeetings = mysqli_query($conn, $query_getmeetings);
+
+								display_table($result_getmeetings);
 								mysqli_close($conn);
 							}
 						?>

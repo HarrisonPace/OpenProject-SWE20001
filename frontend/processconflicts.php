@@ -46,20 +46,20 @@
 		
       	//echo $_SESSION['username'];
 
-			//Define Database
-			$sql_table="meetings";
+		//Define Database
+		$sql_table="meetings";
 
-			//Query to add new user
-			$query = "UPDATE meetings SET $selection = $selection + 1 WHERE meetings.title = '$title';";
+		//Query to add new user
+		$query = "UPDATE meetings SET $selection = $selection + 1 WHERE meetings.title = '$title';";
 
-			
-			$result = mysqli_query($conn, $query);
-			if (!$result)
-			{
-				echo "<p>Something is wrong with ", $query, "</p>";
-			} else {
-				header("Location: conflicts.php");
-			}
+		
+		$result = mysqli_query($conn, $query);
+		if (!$result)
+		{
+			echo "<p>Something is wrong with ", $query, "</p>";
+		} else {
+			header("Location: conflicts.php");
+		}
 
 
 	} //end else no connection
