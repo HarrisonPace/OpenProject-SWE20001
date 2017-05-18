@@ -57,6 +57,13 @@
 							}
 
 							if (isset($_SESSION['username'])) {
+							echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
+							} else {
+							// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
+						}
+			
+
+							if (isset($_SESSION['username'])) {
 								// connection info
 								$host = "127.0.0.1";
 								$user = "root";

@@ -31,6 +31,7 @@
 						</li>
 						<li><a href="meetings.php">Scheduled Meetings</a></li>
 						<li><a href="settings.php">Settings</a></li>
+						
 						<?php
 							if (isset($_SESSION['username'])) {
 								echo "<li><a href='logout.php'>Logout</a></li>";
@@ -41,15 +42,7 @@
 					</ul>
 				</nav>
 			</div>
-			<div>
-				<?php
-					if (isset($_SESSION['username'])) {
-						echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
-					} else {
-						// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
-					}
-				?>
-			</div>
+			
 			<section id="banner">
 				<header>
 					<h2>Group Assignment - Scheduler: <em>v0.1 (beta) by <a href="#">Lachlan Haggart, Harrison Pace & Hoang Nguyen</a></em></h2>
@@ -96,7 +89,15 @@
 				<div class="container">
 					<header>
 						<h2>Login Page:</h2>
-						<a href="login.php" class="button">Click here</a>
+			<div>
+				<?php
+					if (isset($_SESSION['username'])) {
+						echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
+					} else {
+					echo "<li><a href='login.php'> Click Here</a></li>";	
+					}
+				?>
+			</div>
 					</header>
 				</div>
 			</section>
