@@ -44,15 +44,15 @@
 
 
 			$result = mysqli_query($conn, $query);
-			if(!$result)
+			if (!$result)
 			{
 				echo "<p>Something is wrong with ", $query, "</p>";
+			} else {
+				header("Location: manage.php");
 			}
 
 		}
 	} //end else no connection
-
-	echo "<p>Done</p>";
 ?>
 </article>
 <?php

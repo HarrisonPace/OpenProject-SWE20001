@@ -38,9 +38,11 @@
 			$query_adduser = "INSERT INTO userteams (userid, teamid) VALUES ('$teamleaderid', '$last_id');";
 			$result_adduser = mysqli_query($conn, $query_adduser);
 
-			if(!$result_adduser) {
+			if (!$result_adduser) {
 				echo "<p>Something is wrong with ", $query_adduser, "</p>";
-			} 
+			} else {
+				header("Location: teams.php");
+			}
 		}
 	} //end else no connection
 	echo "<p>Done</p>";

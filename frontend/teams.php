@@ -68,8 +68,8 @@
 											// Display the retrieved records
 											echo "<table border=\"1\">";
 											echo "<tr>"
-											."<th scope=\"col\">Team Name</th>"
-											."<th scope=\"col\">Team Leader</th>"
+											."<th scope=\"col\"><strong>Team Name</strong></th>"
+											."<th scope=\"col\"><strong>Team Leader</strong></th>"
 											."</tr>";
 											// retrieve current record pointed by the result pointer
 											while ($row = mysqli_fetch_assoc($result)){

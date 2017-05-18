@@ -61,6 +61,4 @@
 
 		} //end else passwords not matching
 	} //end else no connection
-
-	echo "<p>Done</p>";
 ?>

@@ -46,9 +46,11 @@
 
 			
 			$result = mysqli_query($conn, $query);
-			if(!$result)
+			if (!$result)
 			{
 				echo "<p>Something is wrong with ", $query, "</p>";
+			} else {
+				header("Location: settings.php");
 			}
 
 

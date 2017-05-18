@@ -53,7 +53,7 @@
 							if (isset($_SESSION['username'])) {
 								//echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
 							} else {
-							  echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see scheduled meetings.</strong></p>";
+								echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see scheduled meetings.</strong></p>";
 							}
 
 							if (isset($_SESSION['username'])) {
@@ -78,10 +78,10 @@
 									// Display the retrieved records
 									echo "<table border=\"1\">";
 									echo "<tr>"
-									."<th scope=\"col\">Meeting Name</th>"
-									."<th scope=\"col\">Description</th>"
-									."<th scope=\"col\">Team</th>"
-									."<th scope=\"col\">Scheduled Time</th>"
+									."<th scope=\"col\"><strong>Meeting Name</strong></th>"
+									."<th scope=\"col\"><strong>Description</strong></th>"
+									."<th scope=\"col\"><strong>Team</strong></th>"
+									."<th scope=\"col\"><strong>Scheduled Time</strong></th>"
 									."</tr>";
 									// retrieve current record pointed by the result pointer
 									while ($row = mysqli_fetch_assoc($result)){

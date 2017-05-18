@@ -59,8 +59,9 @@
 
 		if (!$result_insertmeeting) {
 			echo "<p>Something is wrong with ", $query_insertmeeting, "</p>";
+			echo mysqli_error($conn);
+		} else {
+			header("Location: meetings.php");
 		}
 	} // end else no connection
-
-	echo "<p>Done</p>";
 ?>

@@ -79,11 +79,11 @@
 									echo "<form name=\"schedule\" method=\"post\" action=\"processmanage.php\"  onsubmit=\"destroyer()\">";
 									echo "<table border=\"1\">";
 									echo "<tr>"
-									."<th scope=\"col\">Meeting Name</th>"
-									."<th scope=\"col\">Description</th>"
-									."<th scope=\"col\">Team</th>"
-									."<th scope=\"col\">Scheduled Time</th>"
-									."<th scope=\"col\"><strong>Delete</strong></th>"
+									."<th scope=\"col\"><strong>Meeting Name</strong></th>"
+									."<th scope=\"col\"><strong>Description</strong></th>"
+									."<th scope=\"col\"><strong>Team</strong></th>"
+									."<th scope=\"col\"><strong>Scheduled Time</strong></th>"
+									."<th scope=\"col\"><strong><em>Delete</em></strong></th>"
 									."</tr>";
 									// retrieve current record pointed by the result pointer
 									while ($row = mysqli_fetch_assoc($result)){
