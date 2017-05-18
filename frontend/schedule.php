@@ -53,7 +53,11 @@
 							//echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
 							
 							// connection info
-							require_once("dbSettings.php");
+							$host = "127.0.0.1";
+							$user = "root";
+							$pwd = "redtango";
+							$sql_db = "openproject";
+							
 							$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 							$username = $_SESSION['username'];

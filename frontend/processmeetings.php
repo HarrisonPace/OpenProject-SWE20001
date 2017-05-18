@@ -1,7 +1,10 @@
 <?php
 	// connection info
-	require_once("dbSettings.php");
-
+	$host = "127.0.0.1";
+	$user = "root";
+	$pwd = "redtango";
+	$sql_db = "openproject";
+	
 	$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 	function sanitise_input($data) {
@@ -9,10 +12,6 @@
 		$data = stripslashes($data);
 		$data = htmlspecialchars($data);
 		return $data;
-	}
-
-	function datetime($date, $time) {
-		return $date . " " . $time . ":00";
 	}
 
 	// Checks if connection is successful
@@ -35,38 +34,33 @@
 		$title = sanitise_input($title);
 		$description = sanitise_input($description);
 		$team = sanitise_input($team);
-
-		$meet1full = datetime($meet1, $meet1sel);
-		$meet2full = datetime($meet2, $meet2sel);
-		$meet3full = datetime($meet3, $meet3sel);
+		
+		$meet1full = $meet1 . " " . $meet1sel . ":00"; 
+		$meet2full = $meet2 . " " . $meet2sel . ":00"; 
+		$meet3full = $meet3 . " " . $meet3sel . ":00"; 
 
 		// Define Database
 		$sql_table="meetings";
 
 		// query to get team id from team name
-		$query_getteamid = "SELECT teamid FROM teams WHERE teamname='$team'";
+		$query_getteamid = "SELECT teamid FROM teams WHERE teamname='$team';";
 		$result_getteamid = mysqli_query($conn, $query_getteamid);
 
 		if (!$result_getteamid) {
 			echo "<p>Something is wrong with", $query_getteamid, "</p>";
-		} else {
-			$record_getteamid = mysqli_fetch_assoc($result_getteamid);
-			$teamid = $record_getteamid["teamid"];
+		} 
 
-			// query to insert meeting into db
-			$query_insertmeeting = "INSERT INTO meetings (title, description, teamid, meet1, meet2, meet3) VALUES ('$title', '$description', '$teamid', '$meet1full', '$meet2full', '$meet3full');";
-			$result_insertmeeting = mysqli_query($conn, $query_insertmeeting);
+		$record_getteamid = mysqli_fetch_assoc($result_getteamid);
+		$teamid = $record_getteamid["teamid"];
 
-			if (!$result_insertmeeting) {
-				echo "<p>Something is wrong with ", $query_insertmeeting, "</p>";
-			}
+		// query to insert meeting into db
+		$query_insertmeeting = "INSERT INTO meetings (title, description, teamid, meet1, meet2, meet3) VALUES ('$title', '$description', '$teamid', '$meet1full', '$meet2full', '$meet3full');";
+		$result_insertmeeting = mysqli_query($conn, $query_insertmeeting);
+
+		if (!$result_insertmeeting) {
+			echo "<p>Something is wrong with ", $query_insertmeeting, "</p>";
 		}
 	} // end else no connection
 
 	echo "<p>Done</p>";
-?>
-</article>
-<?php
-header("Location: manage.php");
-die();
 ?>

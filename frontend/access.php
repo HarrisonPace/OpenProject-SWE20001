@@ -1,6 +1,9 @@
 <?php
 	// connection info
-	require_once("dbSettings.php");
+	$host = "127.0.0.1";
+	$user = "root";
+	$pwd = "redtango";
+	$sql_db = "openproject";
 
 	$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
@@ -39,7 +42,7 @@
 			$record = mysqli_fetch_assoc($result_login);
 			
 			if (!$username or !$password) {
-				header("Location: login.php ");
+				header("Location: login.php");
 			} elseif (($record["username"] == $username) && ($record["password"] == $password)) {
 				session_start();
 				$_SESSION['username'] = $username;

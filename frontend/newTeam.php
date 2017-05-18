@@ -7,7 +7,11 @@
 	}
 
 	// connection info
-	require_once("dbSettings.php");
+	$host = "127.0.0.1";
+	$user = "root";
+	$pwd = "redtango";
+	$sql_db = "openproject";
+
 	$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 	// Checks if connection is successful
@@ -20,7 +24,6 @@
 		$teamleaderid=$_POST['teamleaderid'];
 		$teamname = sanitise_input($teamname);
 		$teamleaderid = sanitise_input($teamleaderid);
-		$sql_table="users";
 
 		//Query to add new team
 		$query_newteam = "INSERT INTO teams (teamname, teamleaderid) VALUES ('$teamname', '$teamleaderid');";

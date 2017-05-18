@@ -57,7 +57,10 @@
 										//echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
 
 										// connection info
-										require_once("dbSettings.php");
+										$host = "127.0.0.1";
+										$user = "root";
+										$pwd = "redtango";
+										$sql_db = "openproject";
 
 										$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
@@ -93,18 +96,43 @@
 										}
 
 										$id = $_SESSION['id'];
+										// query for getting teams the current logged in user is in
 										$query_teams = "SELECT * FROM teams NATURAL JOIN userteams NATURAL JOIN users WHERE userid='$id';";
+										// query for getting all teams in db
+										$query_allteams = "SELECT * FROM teams" ;
 										$result_teams = mysqli_query($conn, $query_teams);
+										$result_allteams = mysqli_query($conn, $query_allteams);
+										
 
 										echo "<h3>Your teams</h3>";
 
 										if(!$result_teams) {
 											echo "<p>Something is wrong with ", $query_teams, "</p>";
 										} elseif (mysqli_num_rows($result_teams) == 0) {
-											echo "<p>Looks like you don't have any teams. Why not create one?</p>";
+											echo "<p>Looks like you don't have any teams. Why not join or create one?</p>";
 										} else {
 											display_table($result_teams);
 										}
+
+										echo "<h3>Join Team</h3>";
+										echo "
+											<form name='jointeam' method='post' action='joinTeam.php'>
+												<fieldset id='teams'>
+													<p><label for='teamname'>Teams</label>
+													<select name='teamname'>
+										";
+
+										while ($row = mysqli_fetch_assoc($result_allteams)) {
+										    echo "<option value='" . $row['teamname'] . "'>" . $row['teamname'] . "</option>";
+										}
+
+										echo "
+													</select></p>
+													<p><input type='submit' name='Submit' value='Join'></p>
+													<input type='hidden' name='userid' value=$id>
+												</fieldset>
+											</form>
+										";
 
 										echo "<h3>Create New Team</h3>";
 										echo "
