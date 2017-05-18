@@ -4,25 +4,20 @@
 
 	$conn = @mysqli_connect("$host:$port", $user, $pwd, $sql_db);
 
-	function sanitise_input($data)
-	{
+	function sanitise_input($data) {
 		$data = trim($data);
 		$data = stripslashes($data);
 		$data = htmlspecialchars($data);
 		return $data;
 	}
 
-
 	// Checks if connection is successful
-	if (!$conn)
-	{
+	if (!$conn) {
 		// Displays an error message
 		echo "<p>Database connection failure</p>";
-	}
-	else
-	{ // Upon successful connection
+	} else { // Upon successful connection
 
-		// Retrieve Username & Password from DB
+		// Retrieve data from form
 		$title=$_POST['title'];
 		$description=$_POST['description'];
 		$team=$_POST['team'];
