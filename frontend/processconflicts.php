@@ -25,10 +25,10 @@
 	else
 	{ // Upon successful connection
 		if (!isset($_SESSION)) session_start();
-		//Retrieve Username & Password from DB
-		$select=$_POST['select'];
-		$title=$_POST['meeting'];
-		$user=$_SESSION['username'];
+			//Retrieve Username & Password from DB
+			$select=$_POST['select'];
+			$title=$_POST['meeting'];
+			$user=$_SESSION['username'];
 		
 		
 		

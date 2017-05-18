@@ -16,9 +16,9 @@
 
 	// Checks if connection is successful
 	if (!$conn) {
-			// Displays an error message
-			echo "<p>Database connection failure</p>";
-	} else { // Upon successful connection
+		
+			echo "<p>Database connection failure</p>"; 	// Displays an error message
+	} else {                                            // Upon successful connection
 
 		//Retrieve Username & Password from DB
 		$username=$_POST['username'];

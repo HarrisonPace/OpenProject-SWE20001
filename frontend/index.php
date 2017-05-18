@@ -89,15 +89,15 @@
 				<div class="container">
 					<header>
 						<h2>Login Page:</h2>
-			<div>
-				<?php
-					if (isset($_SESSION['username'])) {
-						echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
-					} else {
-					echo "<li><a href='login.php'> Click Here</a></li>";	
-					}
-				?>
-			</div>
+					<div>
+						<?php
+							if (isset($_SESSION['username'])) {
+								echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
+							} else {
+							echo "<li><a href='login.php'> Click Here</a></li>";	
+							}
+						?>
+					</div>
 					</header>
 				</div>
 			</section>
@@ -111,7 +111,7 @@
 				<!-- Copyright -->
 				<div class="copyright">
 					<ul class="menu">
-						<li>&copy; Swinburne University. All rights reserved</li><li>Design: <a href="#">Lachlan Haggart, Harrison Pace & Hoang Nguyen</a></li>
+						<li>&copy; Swinburne University. All rights reserved</li><li>Design: <a href="#">Lachlan Haggart, Harrison Pace,  Hoang Nguyen, Amritpal Thind & Jason Liew</a></li>
 					</ul>
 				</div>
 			</div>

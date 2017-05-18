@@ -56,11 +56,11 @@
 									if (isset($_SESSION['username'])) {
 										//echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
 
-					if (isset($_SESSION['username'])) {
-						echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
-					} else {
-					// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
-					}
+									if (isset($_SESSION['username'])) {
+										echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
+									} else {
+										// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
+									}
 			
 										// connection info
 										$host = "127.0.0.1";
@@ -170,7 +170,7 @@
 				<!-- Copyright -->
 				<div class="copyright">
 					<ul class="menu">
-						<li>&copy; Swinburne University. All rights reserved</li><li>Design: <a href="#">Lachlan Haggart, Harrison Pace & Hoang Nguyen</a></li>
+						<li>&copy; Swinburne University. All rights reserved</li><li>Design: <a href="#">Lachlan Haggart, Harrison Pace ,Hoang Nguyen, Amritpal Thind &  Jason Liew</a></li>
 					</ul>
 				</div>
 			</div>

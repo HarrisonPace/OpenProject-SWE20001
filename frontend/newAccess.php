@@ -45,13 +45,13 @@
 		else
 		{
 
-			//Define Database
-			$sql_table="users";
+				//Define Database
+				$sql_table="users";
 
-			//Query to add new user
-			$query = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password');";
+				//Query to add new user
+				$query = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password');";
 
-			$result = mysqli_query($conn, $query);
+				$result = mysqli_query($conn, $query);
 			if (!$result)
 			{
 				echo "<p>Something is wrong with ", $query, "</p>";

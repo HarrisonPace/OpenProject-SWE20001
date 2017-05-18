@@ -25,10 +25,10 @@
 	else
 	{ // Upon successful connection
 		if (!isset($_SESSION)) session_start();
-		//Retrieve Username & Password from DB
-		$timezone=$_POST['timezone'];
-		$email=$_POST['email'];
-		$user=$_SESSION['username'];
+				//Retrieve Username & Password from DB
+			$timezone=$_POST['timezone'];
+			$email=$_POST['email'];
+			$user=$_SESSION['username'];
 		if($timezone == "") {
 			$timezone = 0;
 		}
