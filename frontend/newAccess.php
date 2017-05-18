@@ -52,18 +52,15 @@
 			$query = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password');";
 
 			$result = mysqli_query($conn, $query);
-			if(!$result)
+			if (!$result)
 			{
 				echo "<p>Something is wrong with ", $query, "</p>";
+			} else {
+				header("Location: registerSuccess.php");
 			}
 
 		} //end else passwords not matching
 	} //end else no connection
 
 	echo "<p>Done</p>";
-?>
-
-<?php
-header("Location: login.php");
-die();
 ?>
