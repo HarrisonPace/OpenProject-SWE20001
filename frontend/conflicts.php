@@ -56,12 +56,12 @@
 								  echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see scheduled meetings.</strong></p>";
 							  }
 
-					if (isset($_SESSION['username'])) {
-						echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
-					} else {
-					// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
-					}
-			
+							  if (isset($_SESSION['username'])) {
+								  echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
+							  } else {
+									// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
+								}
+				
 							if (isset($_SESSION['username'])) {
 								// connection info
 								$host = "127.0.0.1";
@@ -90,7 +90,8 @@
 										."<th scope=\"col\">Meeting Time</th>"
 										."<th scope=\"col\"><strong>Select</strong></th>"
 										."</tr>";
-										if($row["meet1pref"] < 2 && $row["meet2pref"] < 2 && $row["meet3pref"] < 2) {
+										if($row["meet1pref"] < 2 && $row["meet2pref"] < 2 && $row["meet3pref"] < 2)
+										{
 											echo "<p><strong>Resolve Conflict for ",$row["title"],":</p></strong>";
 											echo "<tr>";
 											echo "<td>",$row["meet1"],"</td>";

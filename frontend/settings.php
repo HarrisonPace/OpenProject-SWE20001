@@ -66,11 +66,11 @@
 										echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see change settings.</strong></p>";
 									}
 
-					if (isset($_SESSION['username'])) {
-						echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
-					} else {
-					// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
-					}
+									if (isset($_SESSION['username'])) {
+										echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
+									} else {
+											// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
+									}
 			
 								?>
 							</article>
@@ -87,7 +87,7 @@
 				<!-- Copyright -->
 				<div class="copyright">
 					<ul class="menu">
-						<li>&copy; Swinburne University. All rights reserved</li><li>Design: <a href="#">Lachlan Haggart, Harrison Pace & Hoang Nguyen</a></li>
+						<li>&copy; Swinburne University. All rights reserved</li><li>Design: <a href="#">Lachlan Haggart, Harrison Pace ,Hoang Nguyen, Amritpal Thind &  Jason Liew</a></li>
 					</ul>
 				</div>
 			</div>

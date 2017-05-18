@@ -46,7 +46,7 @@
 		$query_getteamid = "SELECT teamid FROM teams WHERE teamname='$team';";
 		$result_getteamid = mysqli_query($conn, $query_getteamid);
 
-		if (!$result_getteamid) {
+	  if (!$result_getteamid) {
 			echo "<p>Something is wrong with", $query_getteamid, "</p>";
 		} 
 
@@ -55,12 +55,13 @@
 
 		// query to insert meeting into db
 		$query_insertmeeting = "INSERT INTO meetings (title, description, teamid, meet1, meet2, meet3) VALUES ('$title', '$description', '$teamid', '$meet1full', '$meet2full', '$meet3full');";
+
 		$result_insertmeeting = mysqli_query($conn, $query_insertmeeting);
 
-		if (!$result_insertmeeting) {
+	  if (!$result_insertmeeting) {
 			echo "<p>Something is wrong with ", $query_insertmeeting, "</p>";
 			echo mysqli_error($conn);
-		} else {
+	   } else {
 			header("Location: meetings.php");
 		}
 	} // end else no connection

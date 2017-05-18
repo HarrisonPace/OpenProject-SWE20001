@@ -77,7 +77,7 @@
 				<!-- Copyright -->
 				<div class="copyright">
 					<ul class="menu">
-						<li>&copy; Swinburne University. All rights reserved</li><li>Design: <a href="#">Lachlan Haggart, Harrison Pace & Hoang Nguyen</a></li>
+						<li>&copy; Swinburne University. All rights reserved</li><li>Design: <a href="#">Lachlan Haggart, Harrison Pace ,Hoang Nguyen, Amritpal Thind &  Jason Liew</a></li>
 					</ul>
 				</div>
 			</div>
