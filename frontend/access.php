@@ -38,9 +38,7 @@
 		} else {
 			$record = mysqli_fetch_assoc($result_login);
 			
-			if (!$username or !$password) {
-				header("Location: login.php");
-			} elseif (($record["username"] == $username) && ($record["password"] == $password)) {
+			if (($record["username"] == $username) && ($record["password"] == $password)) {
 				session_start();
 				$_SESSION['username'] = $username;
 				$_SESSION['password'] = $password;
