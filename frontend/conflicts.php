@@ -11,11 +11,13 @@
 		<title>Group Assignment - Scheduler</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />     <!-- Upload and Apply main css file on the webpage -->
 	</head>
 	<body>
+	<!-- Navigation bar code is written in division named page-wrapper -->
 		<div id="page-wrapper">
 			<div id="header">
+			<!-- Assign different webpages to differnt lists on the navigation menu    -->
 				<h1><a href="index.php" id="logo">Group Assignment <em>Scheduler</em></a></h1>
 				<nav id="nav">
 					<ul>
@@ -32,10 +34,11 @@
 						<li><a href="meetings.php">Scheduled Meetings</a></li>
 						<li><a href="settings.php">Settings</a></li>
 						<?php
-							if (isset($_SESSION['username'])) {
+						// if user is logged in than show logout in navigation panel otherwise show login 
+							if (isset($_SESSION['username'])) {  
 								echo "<li><a href='logout.php'>Logout</a></li>";
 							} else {
-								echo "<li><a href='logout.php'>Logout</a></li>";
+								echo "<li><a href='login.php'>Login</a></li>";
 							}
 						?>
 					</ul>
@@ -49,18 +52,15 @@
 					</header>
 					<div>
 						<?php
+								// Show logged in as "username" if connection is established
 							  if (!isset($_SESSION)) session_start();
 							  if (isset($_SESSION['username'])) {
-								  //echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
+								    echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
 							  } else {
 								  echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see scheduled meetings.</strong></p>";
 							  }
-
-							  if (isset($_SESSION['username'])) {
-								  echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
-							  } else {
-									// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
-								}
+							  
+							  
 				
 							if (isset($_SESSION['username'])) {
 								// connection info
@@ -68,7 +68,7 @@
 								$user = "root";
 								$pwd = "redtango";
 								$sql_db = "openproject";
-
+									// Establish connection with the database
 								$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 								/*Simple Function to Santise Input
@@ -82,15 +82,16 @@
 
 								function diplay_table($result){
 									// Display the retrieved records
+									
 									// retrieve current record pointed by the result pointer
 									while ($row = mysqli_fetch_assoc($result)){
-										echo "<form name=\"schedule\" method=\"post\" action=\"processconflicts.php\">";
+										echo "<form name=\"schedule\" method=\"post\" action=\"processconflicts.php\">"; // processing this form this processconflicts.php
 										echo "<table border=\"1\">";
 										echo "<tr>"
 										."<th scope=\"col\">Meeting Time</th>"
 										."<th scope=\"col\"><strong>Select</strong></th>"
 										."</tr>";
-										if($row["meet1pref"] < 2 && $row["meet2pref"] < 2 && $row["meet3pref"] < 2)
+										if($row["meet1pref"] < 2 && $row["meet2pref"] < 2 && $row["meet3pref"] < 2) // Table showing information about  different meeting times and user have to select theri preference
 										{
 											echo "<p><strong>Resolve Conflict for ",$row["title"],":</p></strong>";
 											echo "<tr>";

@@ -11,9 +11,10 @@
 		<title>Group Assignment - Scheduler</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main.css" /> <!-- Used to load main.css file to the selected webpage  -->
 	</head>
 	<body>
+<!-- Navigation bar code is written in division named page-wrapper -->
 		<div id="page-wrapper">
 			<div id="header">
 				<h1><a href="index.php" id="logo">Group Assignment <em>Scheduler</em></a></h1>
@@ -32,6 +33,7 @@
 						<li><a href="meetings.php">Scheduled Meetings</a></li>
 						<li><a href="settings.php">Settings</a></li>
 						<?php
+						// if user is logged in than show logout in navigation panel otherwise show login 
 							if (isset($_SESSION['username'])) {
 								echo "<li><a href='logout.php'>Logout</a></li>";
 							} else {
@@ -49,6 +51,7 @@
 					</header>
 					<div>
 						<?php
+							// Show user is logged in as "username" if connection is established
 							if (!isset($_SESSION)) session_start();
 							if (isset($_SESSION['username'])) {
 								//echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
@@ -61,7 +64,7 @@
 								$user = "root";
 								$pwd = "redtango";
 								$sql_db = "openproject";
-
+									// Establish connection
 								$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 								/*Simple Function to Santise Input
@@ -118,7 +121,7 @@
 				<!-- Copyright -->
 				<div class="copyright">
 					<ul class="menu">
-						<li>&copy; Swinburne University. All rights reserved</li><li>Design: <a href="#">Lachlan Haggart, Harrison Pace & Hoang Nguyen</a></li>
+						<li>&copy; Swinburne University. All rights reserved</li><li>Design: <a href="#">Lachlan Haggart, Harrison Pace, Hoang Nguyen, Amritpal Thind & Jason Liew</a></li>
 					</ul>
 				</div>
 			</div>

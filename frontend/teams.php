@@ -11,9 +11,10 @@
 		<title>Group Assignment - Scheduler</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />    <!-- Upload and Apply main css file on the webpage -->
 	</head>
 	<body>
+	<!-- Navigation bar code is written in division named page-wrapper -->
 		<div id="page-wrapper">
 			<div id="header">
 				<h1><a href="index.php" id="logo">Group Assignment <em>Scheduler</em></a></h1>
@@ -32,6 +33,7 @@
 						<li><a href="meetings.php">Scheduled Meetings</a></li>
 						<li><a href="settings.php" class="current">Settings</a></li>
 						<?php
+						// if user is logged in than show logout in navigation panel otherwise show login 
 							if (isset($_SESSION['username'])) {
 								echo "<li><a href='logout.php'>Logout</a></li>";
 							} else {
@@ -52,9 +54,8 @@
 							<!-- Content -->
 							<article>
 								<?php
+								// Show logged in as "username" if connection is established
 									if (!isset($_SESSION)) session_start();
-									if (isset($_SESSION['username'])) {
-										//echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
 
 									if (isset($_SESSION['username'])) {
 										echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
@@ -81,15 +82,15 @@
 											while ($row = mysqli_fetch_assoc($result)){
 												global $conn;
 
-												$teamleaderid = $row["teamleaderid"];
+												$teamleaderid = $row["teamleaderid"];    // Retreive team-leaderId from the database and check whether it matched with User Id or not
 												$query_leader = "SELECT username FROM users WHERE userid='$teamleaderid';";
 												$result_leader = mysqli_query($conn, $query_leader);
 												$record = mysqli_fetch_assoc($result_leader);
-
-												if(!$result_leader) {
+ 
+												if(!$result_leader) {  // If connection doesnot established show the error message
 													echo "<p>Something is wrong with ", $query_leader, "</p>";
 												}
-
+												// Add rows and columns to the table
 												echo "<tr>";
 												echo "<td>",$row["teamname"],"</td>";
 												echo "<td>",$record["username"],"</td>";
@@ -109,7 +110,7 @@
 										$result_teams = mysqli_query($conn, $query_teams);
 										$result_allteams = mysqli_query($conn, $query_allteams);
 										
-
+											// Create a new team
 										echo "<h3>Your teams</h3>";
 
 										if(!$result_teams) {
@@ -120,15 +121,16 @@
 											display_table($result_teams);
 										}
 
-										echo "<h3>Join Team</h3>";
+										echo "<h3>Join Team</h3>"; //Code for joining the team
+										// create a label named teams
 										echo "
 											<form name='jointeam' method='post' action='joinTeam.php'>
 												<fieldset id='teams'>
-													<p><label for='teamname'>Teams</label>
+													<p><label for='teamname'>Teams</label>  
 													<select name='teamname'>
 										";
 
-										while ($row = mysqli_fetch_assoc($result_allteams)) {
+										while ($row = mysqli_fetch_assoc($result_allteams)) {  //fetch team data from the databse
 										    echo "<option value='" . $row['teamname'] . "'>" . $row['teamname'] . "</option>";
 										}
 
@@ -139,7 +141,7 @@
 												</fieldset>
 											</form>
 										";
-
+											// this is used a create a new item when user is logged in to the website
 										echo "<h3>Create New Team</h3>";
 										echo "
 											<form name='teamcreate' method='post' action='newTeam.php'>

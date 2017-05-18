@@ -1,4 +1,5 @@
 <?php
+// Record basic information of Database such as database username, password
 	// $host = "127.0.0.1";
 	// $user = "root";
 	// $pwd = "root";
