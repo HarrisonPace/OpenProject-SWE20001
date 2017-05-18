@@ -96,7 +96,27 @@
 										echo "<td>",$row["title"],"</td>";
 										echo "<td>",$row["description"],"</td>";
 										echo "<td>",$row["teamname"],"</td>";
-										echo "<td>",$row["meet1"],"</td>";
+
+										if ($row["meetpref1"] < 3 && $row["meetpref2"] < 3 && $row["meetpref3"] < 3) {
+											echo "<td>Undecided. <a href='conflicts.php'>Cast a vote!</a></td>";
+										} else {
+											$votedpref = max($row["meetpref1"], $row["meetpref2"], $row["meetpref3"]);
+
+											switch ($votedpref) {
+											    case $row["meetpref1"]:
+											        echo "<td>",$row["meet1"],"</td>";
+											        break;
+											    case $row["meetpref2"]:
+											        echo "<td>",$row["meet2"],"</td>";
+											        break;
+											    case $row["meetpref3"]:
+											        echo "<td>",$row["meet3"],"</td>";
+											        break;
+											    default:
+											        break;
+											}
+										}
+
 										echo "</tr>";
 									}
 									echo "</table>";
@@ -115,6 +135,7 @@
 
 								$id = $_SESSION['id'];
 
+								// query to get meetings that the user is involved in
 								$query_getmeetings = "SELECT * FROM meetings NATURAL JOIN teams NATURAL JOIN userteams WHERE userid=$id;";
 								$result_getmeetings = mysqli_query($conn, $query_getmeetings);
 

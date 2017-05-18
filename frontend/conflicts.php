@@ -45,22 +45,22 @@
 				<div class="container">
 					<header class="major">
 						<h2>Conflict Resolver</h2>
-						<p>Meeting Conflicts</p>
+						<p>Meeting Time Conflicts</p>
 					</header>
 					<div>
 						<?php
-							  if (!isset($_SESSION)) session_start();
-							  if (isset($_SESSION['username'])) {
-								  //echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
-							  } else {
-								  echo "<p style='text-align:center;'>You are not logged in. <strong>Please login to see scheduled meetings.</strong></p>";
-							  }
+							if (!isset($_SESSION)) session_start();
+							if (isset($_SESSION['username'])) {
+								//echo "<p>You are logged in as " . $_SESSION['username'] . "</p>";
+							} else {
+								echo "<p style='text-align:center;'>You are not logged in. <strong>Please login to see scheduled meetings.</strong></p>";
+							}
 
-					if (isset($_SESSION['username'])) {
-						echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
-					} else {
-					// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
-					}
+							if (isset($_SESSION['username'])) {
+								echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
+							} else {
+							// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
+							}
 			
 							if (isset($_SESSION['username'])) {
 								// connection info
@@ -85,13 +85,16 @@
 									// retrieve current record pointed by the result pointer
 									while ($row = mysqli_fetch_assoc($result)){
 										echo "<form name='schedule' method='post' action='processconflicts.php'>";
-										echo "<table border='1'>";
-										echo "<tr>"
-										."<th scope='col'>Meeting Time</th>"
-										."<th scope='col'><strong>Select</strong></th>"
-										."</tr>";
-										if($row["meet1pref"] < 2 && $row["meet2pref"] < 2 && $row["meet3pref"] < 2) {
-											echo "<p><strong>Resolve Conflict for ",$row["title"],":</p></strong>";
+										
+
+										if ($row["meetpref1"] < 3 && $row["meetpref2"] < 3 && $row["meetpref3"] < 3) {
+											echo "<table border='1'>";
+											echo "<tr>"
+											."<th scope='col'><strong>Meeting Time</strong></th>"
+											."<th scope='col'><strong>Vote</strong></th>"
+											."</tr>";
+
+											echo "<p><strong>Vote a timeslot for ",$row["title"],":</p></strong>";
 											echo "<tr>";
 											echo "<td>",$row["meet1"],"</td>";
 											echo "<td> <input type='radio' name='select' value='meet1'> </td>";
@@ -105,9 +108,11 @@
 											echo "<td> <input type='radio' name='select' value='meet3'> </td>";
 											echo "<input type='hidden' name='meeting' value='", $row["title"] ,"'>";
 											echo "</tr>";
+
+											echo "</table>";
+											echo "<p><input type='submit' name='Submit' value='Set'></p>";
 										}
-										echo "</table>";
-										echo "<p><input type='submit' name='Submit' value='Set'></p>";
+
 										echo "</form>";
 									}
 

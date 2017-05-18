@@ -73,15 +73,15 @@
 									return $data;
 								}
 
-								function diplay_table($result){
+								function display_table($result) {
 									// Display the retrieved records
 									// retrieve current record pointed by the result pointer
 									while ($row = mysqli_fetch_assoc($result)){
-										if($row["meet1pref"] > 2 || $row["meet2pref"] > 2 || $row["meet3pref"] > 2) {
-											echo "<h2><strong>Conflict Resolved for ",$row["title"],":</h2></strong>";
-										}
-										if($row["meet1pref"] < 2 && $row["meet2pref"] < 2 && $row["meet3pref"] < 2) {
-											echo "<h2>Conflict Unresolved for ",$row["title"],":</h2>";
+										if ($row["meet1pref"] > 2 || $row["meet2pref"] > 2 || $row["meet3pref"] > 2) {
+											echo "<h2><strong>The time conflict for ",$row["title"]," has been resolved</h2></strong>";
+											echo "<p><a href='meetings.php'>Click here to view your meetings</a></p>";
+										} else {
+											echo "<h2>Your vote has been added to ",$row["title"],"</h2>";
 											echo "<p>Please wait for more members to respond.</p>";
 										}
 
@@ -99,9 +99,13 @@
 								//Define Database
 								$sql_table="meetings";
 
-								$query = "select * from meetings";
-								$result = mysqli_query($conn, $query);
-								diplay_table($result);
+								$id = $_SESSION['id'];
+
+								$query_getmeetings = "SELECT * FROM meetings NATURAL JOIN teams NATURAL JOIN userteams WHERE userid=$id;";
+								$result_getmeetings = mysqli_query($conn, $query_getmeetings);
+
+								display_table($result_getmeetings);
+
 								mysqli_close($conn);
 							}
 						?>

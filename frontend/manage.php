@@ -98,7 +98,27 @@
 										echo "<td>",$row["title"],"</td>";
 										echo "<td>",$row["description"],"</td>";
 										echo "<td>",$row["teamname"],"</td>";
-										echo "<td>",$row["meet1"],"</td>";
+
+										if ($row["meetpref1"] < 3 && $row["meetpref2"] < 3 && $row["meetpref3"] < 3) {
+											echo "<td>Undecided. Cast a vote!</td>";
+										} else {
+											$votedpref = max($row["meetpref1"], $row["meetpref2"], $row["meetpref3"]);
+
+											switch ($votedpref) {
+											    case $row["meetpref1"]:
+											        echo "<td>",$row["meet1"],"</td>";
+											        break;
+											    case $row["meetpref2"]:
+											        echo "<td>",$row["meet2"],"</td>";
+											        break;
+											    case $row["meetpref3"]:
+											        echo "<td>",$row["meet3"],"</td>";
+											        break;
+											    default:
+											        break;
+											}
+										}
+										
 										echo "<td> <input type=\"checkbox\" name=\"delete\" value=\"", $row["title"], "\"> </td>";
 										echo "</tr>";
 									}
