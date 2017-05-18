@@ -2,13 +2,17 @@
 	// connection info
 	require_once("dbSettings.php");
 
-	$conn = @mysqli_connect("$host:$port", $user, $pwd, $sql_db);
+	$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 	function sanitise_input($data) {
 		$data = trim($data);
 		$data = stripslashes($data);
 		$data = htmlspecialchars($data);
 		return $data;
+	}
+
+	function datetime($date, $time) {
+		return $date . " " . $time . ":00";
 	}
 
 	// Checks if connection is successful
@@ -32,9 +36,9 @@
 		$description = sanitise_input($description);
 		$team = sanitise_input($team);
 
-		$meet1full = $meet1 . " " . $meet1sel . ":00";
-		$meet2full = $meet2 . " " . $meet2sel . ":00";
-		$meet3full = $meet3 . " " . $meet3sel . ":00";
+		$meet1full = datetime($meet1, $meet1sel);
+		$meet2full = datetime($meet2, $meet2sel);
+		$meet3full = datetime($meet3, $meet3sel);
 
 		// Define Database
 		$sql_table="meetings";

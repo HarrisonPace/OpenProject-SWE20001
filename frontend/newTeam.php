@@ -8,7 +8,7 @@
 
 	// connection info
 	require_once("dbSettings.php");
-	$conn = @mysqli_connect("$host:$port", $user, $pwd, $sql_db);
+	$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
 	// Checks if connection is successful
 	if (!$conn) {
