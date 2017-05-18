@@ -43,125 +43,127 @@
 					</ul>
 				</nav>
 			</div>
+			<div>
+				<?php
+					// Show logged in as "username" if connection is established
+					if (isset($_SESSION['username'])) {
+						echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
+					}
+				?>
+			</div>
 			<!-- Main -->
-				<section class="wrapper style1">
-					<div class="container">
-						<header class="major">
-							<h2>Teams</h2>
-							<p>Create and Manage your Teams</p>
-						</header>
-						<div id="content">
-							<!-- Content -->
-							<article>
-								<?php
-								// Show logged in as "username" if connection is established
-									if (!isset($_SESSION)) session_start();
+			<section class="wrapper style1">
+				<div class="container">
+					<header class="major">
+						<h2>Teams</h2>
+						<p>Create and Manage your Teams</p>
+					</header>
+					<div id="content">
+						<!-- Content -->
+						<article>
+							<?php
+								if (!isset($_SESSION)) session_start();
 
-									if (isset($_SESSION['username'])) {
-										echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
-									} else {
-										// echo "<p>You are not logged in</p>"; -- Leave blank (ugly)
-									}
-			
-										// connection info
-										$host = "127.0.0.1";
-										$user = "root";
-										$pwd = "redtango";
-										$sql_db = "openproject";
+								if (isset($_SESSION['username'])) {
+									// connection info
+									$host = "127.0.0.1";
+									$user = "root";
+									$pwd = "redtango";
+									$sql_db = "openproject";
 
-										$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
+									$conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
-										function display_table($result){
-											// Display the retrieved records
-											echo "<table border=\"1\">";
-											echo "<tr>"
-											."<th scope=\"col\"><strong>Team Name</strong></th>"
-											."<th scope=\"col\"><strong>Team Leader</strong></th>"
-											."</tr>";
-											// retrieve current record pointed by the result pointer
-											while ($row = mysqli_fetch_assoc($result)){
-												global $conn;
+									function display_table($result){
+										// Display the retrieved records
+										echo "<table border=\"1\">";
+										echo "<tr>"
+										."<th scope=\"col\"><strong>Team Name</strong></th>"
+										."<th scope=\"col\"><strong>Team Leader</strong></th>"
+										."</tr>";
+										// retrieve current record pointed by the result pointer
+										while ($row = mysqli_fetch_assoc($result)){
+											global $conn;
 
-												$teamleaderid = $row["teamleaderid"];    // Retreive team-leaderId from the database and check whether it matched with User Id or not
-												$query_leader = "SELECT username FROM users WHERE userid='$teamleaderid';";
-												$result_leader = mysqli_query($conn, $query_leader);
-												$record = mysqli_fetch_assoc($result_leader);
+											$teamleaderid = $row["teamleaderid"];    // Retreive team-leaderId from the database and check whether it matched with User Id or not
+											$query_leader = "SELECT username FROM users WHERE userid='$teamleaderid';";
+											$result_leader = mysqli_query($conn, $query_leader);
+											$record = mysqli_fetch_assoc($result_leader);
  
-												if(!$result_leader) {  // If connection doesnot established show the error message
-													echo "<p>Something is wrong with ", $query_leader, "</p>";
-												}
-												// Add rows and columns to the table
-												echo "<tr>";
-												echo "<td>",$row["teamname"],"</td>";
-												echo "<td>",$record["username"],"</td>";
-												echo "</tr>";
+											if(!$result_leader) {  // If connection doesnot established show the error message
+												echo "<p>Something is wrong with ", $query_leader, "</p>";
 											}
-											echo "</table>";
-
-											// Frees up the memory, after using the result pointer
-											mysqli_free_result($result);
+											// Add rows and columns to the table
+											echo "<tr>";
+											echo "<td>",$row["teamname"],"</td>";
+											echo "<td>",$record["username"],"</td>";
+											echo "</tr>";
 										}
+										echo "</table>";
 
-										$id = $_SESSION['id'];
-										// query for getting teams the current logged in user is in
-										$query_teams = "SELECT * FROM teams NATURAL JOIN userteams NATURAL JOIN users WHERE userid='$id';";
-										// query for getting all teams in db
-										$query_allteams = "SELECT * FROM teams" ;
-										$result_teams = mysqli_query($conn, $query_teams);
-										$result_allteams = mysqli_query($conn, $query_allteams);
-										
-											// Create a new team
-										echo "<h3>Your teams</h3>";
-
-										if(!$result_teams) {
-											echo "<p>Something is wrong with ", $query_teams, "</p>";
-										} elseif (mysqli_num_rows($result_teams) == 0) {
-											echo "<p>Looks like you don't have any teams. Why not join or create one?</p>";
-										} else {
-											display_table($result_teams);
-										}
-
-										echo "<h3>Join Team</h3>"; //Code for joining the team
-										// create a label named teams
-										echo "
-											<form name='jointeam' method='post' action='joinTeam.php'>
-												<fieldset id='teams'>
-													<p><label for='teamname'>Teams</label>  
-													<select name='teamname'>
-										";
-
-										while ($row = mysqli_fetch_assoc($result_allteams)) {  //fetch team data from the databse
-										    echo "<option value='" . $row['teamname'] . "'>" . $row['teamname'] . "</option>";
-										}
-
-										echo "
-													</select></p>
-													<p><input type='submit' name='Submit' value='Join'></p>
-													<input type='hidden' name='userid' value=$id>
-												</fieldset>
-											</form>
-										";
-											// this is used a create a new item when user is logged in to the website
-										echo "<h3>Create New Team</h3>";
-										echo "
-											<form name='teamcreate' method='post' action='newTeam.php'>
-												<fieldset id='teamdetails'>
-													<p><label for='teamname'>Team Name</label>
-													<input name='teamname' type='text' id='teamname'></p>
-													<input type='hidden' name='teamleaderid' value=$id>
-
-													<p><input type='submit' name='Submit' value='Create'></p>
-												</fieldset>
-											</form>
-										";
-									} else {
-										echo "<p style=\"text-align:center;\">You are not logged in. <strong>Please login to see change settings.</strong></p>";
+										// Frees up the memory, after using the result pointer
+										mysqli_free_result($result);
 									}
-								?>
-							</article>
-						</div>
+
+									$id = $_SESSION['id'];
+									// query for getting teams the current logged in user is in
+									$query_teams = "SELECT * FROM teams NATURAL JOIN userteams NATURAL JOIN users WHERE userid='$id';";
+									// query for getting all teams in db
+									$query_allteams = "SELECT * FROM teams" ;
+									$result_teams = mysqli_query($conn, $query_teams);
+									$result_allteams = mysqli_query($conn, $query_allteams);
+									
+										// Create a new team
+									echo "<h3>Your teams</h3>";
+
+									if(!$result_teams) {
+										echo "<p>Something is wrong with ", $query_teams, "</p>";
+									} elseif (mysqli_num_rows($result_teams) == 0) {
+										echo "<p>Looks like you don't have any teams. Why not join or create one?</p>";
+									} else {
+										display_table($result_teams);
+									}
+
+									echo "<h3>Join Team</h3>"; //Code for joining the team
+									// create a label named teams
+									echo "
+										<form name='jointeam' method='post' action='joinTeam.php'>
+											<fieldset id='teams'>
+												<p><label for='teamname'>Teams</label>  
+												<select name='teamname'>
+									";
+
+									while ($row = mysqli_fetch_assoc($result_allteams)) {  //fetch team data from the databse
+									    echo "<option value='" . $row['teamname'] . "'>" . $row['teamname'] . "</option>";
+									}
+
+									echo "
+												</select></p>
+												<p><input type='submit' name='Submit' value='Join'></p>
+												<input type='hidden' name='userid' value=$id>
+											</fieldset>
+										</form>
+									";
+										// this is used a create a new item when user is logged in to the website
+									echo "<h3>Create New Team</h3>";
+									echo "
+										<form name='teamcreate' method='post' action='newTeam.php'>
+											<fieldset id='teamdetails'>
+												<p><label for='teamname'>Team Name</label>
+												<input name='teamname' type='text' id='teamname'></p>
+												<input type='hidden' name='teamleaderid' value=$id>
+
+												<p><input type='submit' name='Submit' value='Create'></p>
+											</fieldset>
+										</form>
+									";
+								} else {
+									echo "<p style='text-align:center;'>You are not logged in. <strong>Please login to see change settings.</strong></p>";
+								}
+							?>
+						</article>
 					</div>
-				</section>
+				</div>
+			</section>
 			<!-- Footer -->
 			<div id="footer">
 				<!-- Icons -->

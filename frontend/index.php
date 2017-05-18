@@ -42,7 +42,13 @@
 					</ul>
 				</nav>
 			</div>
-			
+			<div>
+				<?php
+					if (isset($_SESSION['username'])) {
+						echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
+					}
+				?>
+			</div>
 			<section id="banner">
 				<header>
 					<h2>Group Assignment - Scheduler: <em>v0.1 (beta) by <a href="#">Lachlan Haggart, Harrison Pace & Hoang Nguyen</a></em></h2>
@@ -88,16 +94,15 @@
 			<section id="cta" class="wrapper style3">
 				<div class="container">
 					<header>
-						<h2>Login Page:</h2>
-					<div>
-						<?php
-							if (isset($_SESSION['username'])) {
-								echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
-							} else {
-							echo "<li><a href='login.php'> Click Here</a></li>";	
-							}
-						?>
-					</div>
+						<div>
+							<?php
+								if (isset($_SESSION['username'])) {
+									echo "<p style=\"text-align:center;\">Logged in as <strong>" . $_SESSION['username'] . "</strong>.</p>";
+								} else {
+								echo "<h2>Login Page:</h2><li><a href='login.php'> Click Here</a></li>";	
+								}
+							?>
+						</div>
 					</header>
 				</div>
 			</section>
